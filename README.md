@@ -1,75 +1,70 @@
-# React + TypeScript + Vite
+# NTH PDF Preview
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A real-time invoice PDF preview application built with React, TypeScript, and `@react-pdf/renderer`. Edit invoice details in a form on the left and instantly preview the generated PDF on the right.
 
-Currently, two official plugins are available:
+![Invoice Preview](https://img.shields.io/badge/React-19-blue) ![Vite](https://img.shields.io/badge/Vite-7-purple) ![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## React Compiler
+- **Live PDF Preview** — Changes in the form are reflected in the PDF after clicking "Preview PDF"
+- **Invoice Form** — Invoice number, customer, payment condition, currency, dates, and more
+- **Product Management** — Add/remove products with price, quantity, and discount
+- **Order Summary** — Auto-calculated subtotal, tax, shipping, and order total
+- **PDF Toolbar** — Built-in zoom, page navigation, download, and print controls
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## Tech Stack
 
-Note: This will impact Vite dev & build performances.
+| Technology                                   | Purpose                 |
+| -------------------------------------------- | ----------------------- |
+| [React 19](https://react.dev)                | UI framework            |
+| [TypeScript](https://www.typescriptlang.org) | Type safety             |
+| [Vite 7](https://vite.dev)                   | Build tool & dev server |
+| [@react-pdf/renderer](https://react-pdf.org) | PDF generation          |
+| [Tailwind CSS 4](https://tailwindcss.com)    | Utility styling         |
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Prerequisites
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- [Node.js](https://nodejs.org) >= 18
+- [Bun](https://bun.sh) (recommended) or npm
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Install & Run
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+# Install dependencies
+bun install
+
+# Start dev server
+bun run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Open [http://localhost:5173](http://localhost:5173) in your browser.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Build for Production
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+bun run build
 ```
+
+Output will be in the `dist/` directory.
+
+## Project Structure
+
+```
+src/
+├── App.tsx                 # Main layout (form panel + PDF viewer)
+├── InvoiceForm.tsx         # Invoice form with product table
+├── InvoiceData.ts          # Data model & calculation helpers
+├── InvoiceComponent.tsx    # PDF template root component
+├── InvoiceNo.tsx           # PDF invoice number & date
+├── InvoiceBillTo.tsx       # PDF pay-to & invoice-to sections
+├── InvoiceItemsTable.tsx   # PDF product table & order summary
+├── InvoiceTableRow.tsx     # PDF product row rendering
+├── index.css               # Global styles
+└── main.tsx                # App entry point
+```
+
+## License
+
+MIT
